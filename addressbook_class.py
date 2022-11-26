@@ -6,6 +6,15 @@ from collections import UserDict
 """
 
 
+class Record:
+    def __init__(self, names):
+        self.name = Name(names)
+        self.phones = []
+
+    def add_phone(self, phones):
+        self.phones.append(Phone(phones))
+
+
 class AddressBook(UserDict):
     """
     Книга контактів.
@@ -15,18 +24,6 @@ class AddressBook(UserDict):
 
     def get_record(self):
         return self.data
-
-
-class Record:
-    def __init__(self, name):
-        self.name = Name(name)
-        self.phone = []
-
-    def add_record(self):
-        AddressBook.add_record(self.name)
-
-    def add_phone(self, phone):
-        self.phone.append(Phone(phone))
 
 
 class Field:

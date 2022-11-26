@@ -1,13 +1,13 @@
 from addressbook_class import AddressBook, Record
 
 
-PHONE_BOOK = AddressBook
-
-
 """
 Бот помічник.
 Працює з командами (hello, add, change, phone, show_all, good_bye, close, exit, .)
 """
+
+
+PHONE_BOOK = AddressBook()
 
 
 def input_error(func):
@@ -19,7 +19,7 @@ def input_error(func):
         try:
             return func(*args, **kwargs)
         except TypeError:
-            return f"Wrong comand."
+            return f"Wrong command."
         except KeyError:
             return f"KeyError"
         except IndexError:
@@ -52,18 +52,35 @@ def hello():
 
 
 @input_error
-def add(name, number):
+def add(data):
     """
     Функція для додавання нового номеру в телефонну книгу
     """
+    name, phones = create_data(data)
+    print(name, phones)
+    print(PHONE_BOOK)
     if name in PHONE_BOOK:
         return f"Цей контакт {name} вже використовується введіть інше ім`я"
     record = Record(name)
-    record.add_phone(number)
+    for phon in phones:
+        record.add_phone(phon)
+    PHONE_BOOK.add_record(record)
+    return f"Запис ({name} : {phones}) додано до словника"
 
-    phone_number = (name, number)
-    PHONE_BOOK.update([phone_number])
-    return f"Запис ({name} : {number}) додано до словника"
+
+@input_error
+def create_data(data):
+    """
+    Розділяє вхідні дані - номер і телефон.
+    """
+    name, phones = data.strip().split(' ')
+
+    if name.isnumeric():
+        raise ValueError('Wrong name.')
+    for phon in phones:
+        if not phon.isnumeric():
+            raise ValueError('Wrong phones.')
+    return name.title(), phones
 
 
 @input_error
