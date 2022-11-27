@@ -97,6 +97,21 @@ def change(data):
     return f"Запис ({name} : {number}) замінено в словнику"
 
 
+def delete_user(name):
+    """
+    Функція видалення контакту.
+    :param name:
+    :return:
+    """
+    name = name.title()
+
+    if name not in PHONE_BOOK:
+        return f"{name} імя не знайдено в словнику"
+
+    record = PHONE_BOOK.pop(name)
+    return f"Запис ({record.return_record()}) видалено з словника."
+
+
 @input_error
 def user_add_phone(data):
     """
@@ -156,6 +171,7 @@ USER_COMMANDS = {
     "add": add,
     "change": change,
     "user_add_phone": user_add_phone,
+    "delete_user": delete_user,
     "phone": phone,
     "show_all": show_all,
     "good_bye": good_bye,
@@ -171,7 +187,7 @@ def main():
     """
     while True:
         user_input = input("Введіть будь ласка команду "
-                           "(hello, add, change, phone, user_add_phone, show_all, good_bye, close, exit, .)")
+                           "(hello, add, delete_user, change, phone, user_add_phone, show_all, good_bye, close, exit, .)")
         result = change_input(user_input)
         print(result)
         if result == "Good Bye!":
