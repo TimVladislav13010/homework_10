@@ -23,11 +23,11 @@ class Record:
     def change_phone_record(self, new_phone):
 
         if len(self.phones) == 0:
-            self.phones.append(new_phone)
+            self.phones.append(Phone(new_phone))
             # return pass
 
         if len(self.phones) == 1:
-            self.phones[1] = new_phone
+            self.phones[0].change_value(new_phone)
             # return pass
 
         if len(self.phones) > 1:
@@ -36,6 +36,9 @@ class Record:
             for phone in self.phones:
                 i += 1
                 print(f"№ {i} : {phone}")
+            inp_user = int(input(f"Введіть №..."))
+            self.phones[inp_user] = new_phone
+            # return pass
 
 
 class AddressBook(UserDict):
@@ -55,6 +58,9 @@ class AddressBook(UserDict):
 class Field:
     def __init__(self, value):
         self.value = value
+
+    def change_value(self, new_value):
+        self.value = new_value
 
 
 class Name(Field):

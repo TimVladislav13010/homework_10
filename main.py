@@ -94,9 +94,6 @@ def change(data):
         return f"{number} не номер телефону будь ласка введіть числа"
     records = PHONE_BOOK[name]
     records.change_phone_record(number)
-
-    PHONE_BOOK[name] = number
-
     return f"Запис ({name} : {number}) замінено в словнику"
 
 
