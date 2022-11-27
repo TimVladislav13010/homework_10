@@ -3,7 +3,8 @@ from addressbook_class import AddressBook, Record
 
 """
 Бот помічник.
-Працює з командами (hello, add, change, phone, show_all, good_bye, close, exit, .)
+Працює з командами (help, hello, add, change, delete_user, user_add_phone, user_delete_phone, phone, show_all, 
+good_bye, close, exit, .)
 """
 
 
