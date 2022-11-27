@@ -14,6 +14,12 @@ class Record:
     def add_phone(self, phones):
         self.phones.append(Phone(phones))
 
+    def return_record(self):
+        phone_numbers = ""
+        for phone in self.phones:
+            phone_numbers += f"{phone.value}"
+        return f"{self.name.value}: {phone_numbers}"
+
 
 class AddressBook(UserDict):
     """
@@ -22,7 +28,7 @@ class AddressBook(UserDict):
     def add_record(self, record):
         self.data[record.name.value] = record
 
-    def get_record(self):
+    def get_records(self):
         return self.data
 
 

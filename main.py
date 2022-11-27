@@ -111,8 +111,8 @@ def show_all():
     Функція для відображення всієї телефонної книги
     """
     show_number = ""
-    for key, val in PHONE_BOOK.items():
-        show_number += "Ім'я: " + key + ", номер: " + val + "\n"
+    for key, val in PHONE_BOOK.get_records().items():
+        show_number += f"{val.return_record()}\n"
     return show_number
 
 
