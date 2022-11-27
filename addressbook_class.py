@@ -3,6 +3,12 @@ from collections import UserDict
 
 """
 Класи бота помічника.
+
+Record
+AddressBook(UserDict)
+Field
+Name(Field)
+Phone(Field)
 """
 
 
