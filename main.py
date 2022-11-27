@@ -97,6 +97,7 @@ def change(data):
     return f"Запис ({name} : {number}) замінено в словнику"
 
 
+@input_error
 def user_add_phone(data):
     """
     Функціця для додавання номеру до існуючого контакту.

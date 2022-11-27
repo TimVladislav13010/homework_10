@@ -2,11 +2,18 @@ from collections import UserDict
 
 
 """
-Класи.
+Класи бота помічника.
 """
 
 
 class Record:
+    """
+    Клас Record, який відповідає за логіку додавання/видалення/редагування необов'язкових полів та зберігання
+    обов'язкового поля Name.
+
+    При ініціалізації класу створюється ім'я класу Name, та список номерів телефоні, в який будуть записані номери
+    телефонів класу Phone.
+    """
     def __init__(self, name: str):
         self.name = Name(name)
         self.phones = []
@@ -15,13 +22,22 @@ class Record:
         self.phones.append(Phone(phones))
 
     def return_record(self):
+
         phone_numbers = ""
         for phone in self.phones:
             phone_numbers += f"{phone.value}, "
         return f"{self.name.value}: {phone_numbers[:-2]}"
 
     def change_phone_record(self, new_phone):
+        """
+        Метод для зміни номера телефона в існуючого контакту.
 
+        1. Якщо в існуючого контакту немає номерів він додає номер телефону до списку класу Phone.
+        2. Якщо номер один в списку то він замінюється на new_phone.
+        3. Якщо номерів декілька в списку контакта замінити на той що вибере користувач за індексом.
+        :param new_phone:
+        :return:
+        """
         if len(self.phones) == 0:
             self.phones.append(Phone(new_phone))
 
@@ -40,7 +56,9 @@ class Record:
 
 class AddressBook(UserDict):
     """
-    Книга контактів.
+    Клас книги контактів.
+
+    Батьківський клас UserDict.
     """
     def add_record(self, record):
         self.data[record.name.value] = record
@@ -53,16 +71,32 @@ class AddressBook(UserDict):
 
 
 class Field:
+    """
+    Батьківський клас для Name, Phone.
+    """
     def __init__(self, value):
         self.value = value
 
     def change_value(self, new_value):
+        """
+        Метод для зміни значення value.
+        :param new_value:
+        :return:
+        """
         self.value = new_value
 
 
 class Name(Field):
+    """
+    Ім'я контакта.
+    """
     pass
 
 
 class Phone(Field):
+    """
+    Номер телефону контакта.
+
+    Додається до списку phones, який створюється при ініціалізації класу Record.
+    """
     pass
