@@ -24,11 +24,9 @@ class Record:
 
         if len(self.phones) == 0:
             self.phones.append(Phone(new_phone))
-            # return pass
 
         if len(self.phones) == 1:
             self.phones[0].change_value(new_phone)
-            # return pass
 
         if len(self.phones) > 1:
             i = -1
@@ -38,7 +36,6 @@ class Record:
                 print(f"№ {i} : {phone}")
             inp_user = int(input(f"Введіть №..."))
             self.phones[inp_user] = new_phone
-            # return pass
 
 
 class AddressBook(UserDict):
