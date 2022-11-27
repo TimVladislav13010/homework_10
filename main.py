@@ -126,7 +126,22 @@ def user_add_phone(data):
         return f"{number} не номер телефону будь ласка введіть числа"
     record = PHONE_BOOK[name]
     record.add_phone(number)
-    return f"Номер ({number}) додано до користувача {name}"
+    return f"Номер ({number}) додано до контакту {name}"
+
+
+def user_delete_phone(name):
+    """
+    Функціця для видалення номеру в існуючого контакту.
+    """
+    name = name.title()
+    if name not in PHONE_BOOK:
+        return f"{name} імя не знайдено в словнику"
+    record = PHONE_BOOK[name]
+    result = record.delete_phone_record(name)
+    returns = f"У контакта немає номерів..."
+    if result in returns:
+        return returns
+    return f"Номер телефону: {result}, видалено в контакта {name}"
 
 
 def phone(name):
@@ -166,18 +181,34 @@ def handler(commands):
     return USER_COMMANDS.get(commands, break_f)
 
 
+def helps():
+    return f"Команди на які відповідає помічник: \n"\
+           "help\n"\
+           "hello \n"\
+           "add - (add name phone)\n"\
+           "delete_user - (delete_user name)\n"\
+           "change - (change name phone)\n"\
+           "phone - (phone name)\n"\
+           "user_add_phone - (user_add_phone name phone)\n"\
+           "user_delete_phone - (user_delete_phone name)\n"\
+           "show_all\n"\
+           "good_bye, close, exit, .\n"
+
+
 USER_COMMANDS = {
     "hello": hello,
     "add": add,
     "change": change,
     "user_add_phone": user_add_phone,
+    "user_delete_phone": user_delete_phone,
     "delete_user": delete_user,
     "phone": phone,
     "show_all": show_all,
     "good_bye": good_bye,
     "close": good_bye,
     "exit": good_bye,
-    ".": good_bye
+    ".": good_bye,
+    "help": helps
 }
 
 
@@ -186,8 +217,7 @@ def main():
     Логіка роботи бота помічника
     """
     while True:
-        user_input = input("Введіть будь ласка команду "
-                           "(hello, add, delete_user, change, phone, user_add_phone, show_all, good_bye, close, exit, .)")
+        user_input = input("Введіть будь ласка команду: (або скористайтеся командою help)\n")
         result = change_input(user_input)
         print(result)
         if result == "Good Bye!":

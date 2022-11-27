@@ -53,6 +53,35 @@ class Record:
             inp_user = int(input(f"Введіть №..."))
             self.phones[inp_user] = Phone(new_phone)
 
+    def delete_phone_record(self, name):
+        """
+        Метод для видалення номеру в існуючого контакту.
+
+        1. Якщо в існуючого контакту немає номерів повернення строки.
+        2. Якщо номер один в списку то він видаляється.
+        3. Якщо номерів декілька в списку контакта видаляється той що вибере користувач за індексом.
+        :param name:
+        :return:
+        """
+        if len(self.phones) == 0:
+            return f"У контакта немає номерів..."
+
+        elif len(self.phones) == 1:
+            number = self.phones[0].return_value()
+            self.phones.pop(0)
+            return f"{number}"
+
+        elif len(self.phones) > 1:
+            i = -1
+            print(f"Виберіть номер телефону для видалення")
+            for phone in self.phones:
+                i += 1
+                print(f"№  {i}  :  {phone.value}")
+            inp_user = int(input(f"Введіть №..."))
+            number = self.phones[inp_user].return_value()
+            self.phones.pop(inp_user)
+            return f"{number}"
+
 
 class AddressBook(UserDict):
     """
@@ -84,6 +113,9 @@ class Field:
         :return:
         """
         self.value = new_value
+
+    def return_value(self):
+        return self.value
 
 
 class Name(Field):
