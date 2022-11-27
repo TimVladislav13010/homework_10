@@ -17,8 +17,8 @@ class Record:
     def return_record(self):
         phone_numbers = ""
         for phone in self.phones:
-            phone_numbers += f"{phone.value}"
-        return f"{self.name.value}: {phone_numbers}"
+            phone_numbers += f"{phone.value}, "
+        return f"{self.name.value}: {phone_numbers[:-2]}"
 
     def change_phone_record(self, new_phone):
 
@@ -33,9 +33,9 @@ class Record:
             print(f"Виберіть номер телефону для видалення")
             for phone in self.phones:
                 i += 1
-                print(f"№ {i} : {phone}")
+                print(f"№  {i}  :  {phone.value}")
             inp_user = int(input(f"Введіть №..."))
-            self.phones[inp_user] = new_phone
+            self.phones[inp_user] = Phone(new_phone)
 
 
 class AddressBook(UserDict):

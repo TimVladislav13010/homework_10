@@ -97,6 +97,22 @@ def change(data):
     return f"Запис ({name} : {number}) замінено в словнику"
 
 
+def user_add_phone(data):
+    """
+    Функціця для додавання номеру до існуючого контакту.
+    """
+    name, number = data.strip().split(' ')
+    name = name.title()
+    if name not in PHONE_BOOK:
+        return f"{name} імя не знайдено в словнику"
+
+    elif not number.isdigit():
+        return f"{number} не номер телефону будь ласка введіть числа"
+    record = PHONE_BOOK[name]
+    record.add_phone(number)
+    return f"Номер ({number}) додано до користувача {name}"
+
+
 def phone(name):
     """
     Функція повертає номер телефону з телефонної книги
@@ -138,6 +154,7 @@ USER_COMMANDS = {
     "hello": hello,
     "add": add,
     "change": change,
+    "user_add_phone": user_add_phone,
     "phone": phone,
     "show_all": show_all,
     "good_bye": good_bye,
@@ -153,7 +170,7 @@ def main():
     """
     while True:
         user_input = input("Введіть будь ласка команду "
-                           "(hello, add, change, phone, show_all, good_bye, close, exit, .)")
+                           "(hello, add, change, phone, user_add_phone, show_all, good_bye, close, exit, .)")
         result = change_input(user_input)
         print(result)
         if result == "Good Bye!":
