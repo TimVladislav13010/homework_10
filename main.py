@@ -57,8 +57,6 @@ def add(data):
     Функція для додавання нового номеру в телефонну книгу
     """
     name, phones = create_data(data)
-    print(name, phones)
-    print(PHONE_BOOK)
     if name in PHONE_BOOK:
         return f"Цей контакт {name} вже використовується введіть інше ім`я"
     record = Record(name)
