@@ -20,6 +20,23 @@ class Record:
             phone_numbers += f"{phone.value}"
         return f"{self.name.value}: {phone_numbers}"
 
+    def change_phone_record(self, new_phone):
+
+        if len(self.phones) == 0:
+            self.phones.append(new_phone)
+            # return pass
+
+        if len(self.phones) == 1:
+            self.phones[1] = new_phone
+            # return pass
+
+        if len(self.phones) > 1:
+            i = -1
+            print(f"Виберіть номер телефону для видалення")
+            for phone in self.phones:
+                i += 1
+                print(f"№ {i} : {phone}")
+
 
 class AddressBook(UserDict):
     """
@@ -30,6 +47,9 @@ class AddressBook(UserDict):
 
     def get_records(self):
         return self.data
+
+    def get_name_record(self, name) -> Record:
+        return self.data.get(name)
 
 
 class Field:

@@ -40,7 +40,7 @@ def change_input(user_input):
     for key in USER_COMMANDS:
         if user_input.strip().lower().startswith(key):
             new_input = key
-            data = user_input[len(new_input):]
+            data = user_input[len(new_input)+1:]
             break
     if data:
         return handler(new_input)(data)
@@ -81,15 +81,19 @@ def create_data(data):
 
 
 @input_error
-def change(name, number):
+def change(data):
     """
     Функціця для змінни існуючого номеру в телефонній книзі
     """
+    name, number = data.strip().split(' ')
+    name = name.title()
     if name not in PHONE_BOOK:
         return f"{name} імя не знайдено в словнику"
 
     elif not number.isdigit():
-        return f"{number} не числово будь ласка введіть числа"
+        return f"{number} не номер телефону будь ласка введіть числа"
+    records = PHONE_BOOK[name]
+    records.change_phone_record(number)
 
     PHONE_BOOK[name] = number
 
@@ -100,10 +104,11 @@ def phone(name):
     """
     Функція повертає номер телефону з телефонної книги
     """
-    if not PHONE_BOOK.get(name):
+    name = name.title().strip()
+    if not PHONE_BOOK.get_name_record(name):
         return f"{name} не знайдено в телефонній книзі"
-    phones = PHONE_BOOK.get(name)
-    return f"{name} : {phones}"
+    phones = PHONE_BOOK.get_name_record(name).return_record()
+    return f"Інфомацію знайдено:\n{phones}"
 
 
 def show_all():
