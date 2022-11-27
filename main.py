@@ -62,8 +62,7 @@ def add(data):
     if name in PHONE_BOOK:
         return f"Цей контакт {name} вже використовується введіть інше ім`я"
     record = Record(name)
-    for phon in phones:
-        record.add_phone(phon)
+    record.add_phone(phones)
     PHONE_BOOK.add_record(record)
     return f"Запис ({name} : {phones}) додано до словника"
 

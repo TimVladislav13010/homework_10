@@ -7,8 +7,8 @@ from collections import UserDict
 
 
 class Record:
-    def __init__(self, names):
-        self.name = Name(names)
+    def __init__(self, name):
+        self.name = Name(name)
         self.phones = []
 
     def add_phone(self, phones):
