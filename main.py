@@ -62,7 +62,7 @@ def add(data):
     record = Record(name)
     record.add_phone(phones)
     PHONE_BOOK.add_record(record)
-    return f"Запис ({name} : {phones}) додано до словника"
+    return f"Запис ({name} : {phones}) успішно додано до словника"
 
 
 @input_error

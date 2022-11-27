@@ -7,7 +7,7 @@ from collections import UserDict
 
 
 class Record:
-    def __init__(self, name):
+    def __init__(self, name: str):
         self.name = Name(name)
         self.phones = []
 
@@ -27,7 +27,7 @@ class AddressBook(UserDict):
 
 
 class Field:
-    def __int__(self, value):
+    def __init__(self, value):
         self.value = value
 
 
